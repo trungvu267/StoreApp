@@ -1,9 +1,12 @@
 import * as React from 'react'
-import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Button from '@mui/material/Button'
+import {
+  ButtonGroup,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+} from '@mui/material'
 import Typography from '@mui/material/Typography'
 import testImage from '../../assets/images/products/yellowT.png'
 import { toast } from 'react-toastify'
@@ -36,24 +39,31 @@ export default function ProductCard() {
           Lizard
         </Typography>
       </CardContent>
-      <CardActions className="flex flex-col m-2 p-0 items-center space-y-1">
-        <Button
-          variant="outlined"
-          size="small"
-          color="success"
-          className="w-full"
-          onClick={handleAddToCartBtn}
+      <CardActions>
+        <ButtonGroup
+          orientation="vertical"
+          aria-label="vertical contained button group"
+          variant="contained"
+          className="space-y-1"
         >
-          Add to cart
-        </Button>
-        <Button
-          variant="outlined"
-          size="small"
-          color="warning"
-          className="w-full m-0"
-        >
-          View Product detail
-        </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            color="success"
+            className="w-full"
+            onClick={handleAddToCartBtn}
+          >
+            Add to cart
+          </Button>
+          <Button
+            variant="outlined"
+            size="small"
+            color="warning"
+            className="w-full m-0"
+          >
+            View Product detail
+          </Button>
+        </ButtonGroup>
       </CardActions>
     </Card>
   )
