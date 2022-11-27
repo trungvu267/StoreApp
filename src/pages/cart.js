@@ -3,14 +3,8 @@ import Layout from '../components/Layout'
 import { Box } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/DeleteOutlined'
-import SaveIcon from '@mui/icons-material/Save'
-import CancelIcon from '@mui/icons-material/Close'
 import QuantityEditModal from '../components/QuantityEditModal'
-import {
-  GridRowModes,
-  DataGridPro,
-  GridActionsCellItem,
-} from '@mui/x-data-grid-pro'
+import { DataGridPro, GridActionsCellItem } from '@mui/x-data-grid-pro'
 import {
   selectedCartItemIdAtom,
   cartItemsAtom,
