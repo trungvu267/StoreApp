@@ -1,5 +1,8 @@
 import React from 'react'
-import { TextField, Button, Tabs, Tab, Typography, Box } from '@mui/material'
+import { Tabs, Tab, Typography, Box } from '@mui/material'
+import RegisterForm from '../components/RegisterForm'
+import LoginForm from '../components/LoginForm'
+import ToastContainer from '../components/ToastContainer'
 function TabPanel(props) {
   const { children, value, index, ...other } = props
 
@@ -51,68 +54,9 @@ const Login = () => {
       <TabPanel value={value} index={1}>
         <RegisterForm />
       </TabPanel>
+      <ToastContainer />
     </div>
   )
 }
 
 export default Login
-
-const LoginForm = () => {
-  return (
-    <div className="border border-gray rounded-sm shadow-lg h-96 w-96 p-3">
-      <div className="text-3xl mb-6">Login</div>
-      <form className="space-y-6">
-        <TextField
-          fullWidth
-          id="outlined-basic"
-          label="Tên đăng nhập"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          id="outlined-basic"
-          label="Mật khẩu"
-          variant="outlined"
-        />
-        <div className="mt-6">
-          <Button fullWidth variant="contained" className="bg-blue-500">
-            Đăng nhập
-          </Button>
-        </div>
-      </form>
-    </div>
-  )
-}
-
-const RegisterForm = () => {
-  return (
-    <div className="border border-gray rounded-sm shadow-lg h-96 w-96 p-3">
-      <div className="text-3xl mb-6">Register</div>
-      <form className="space-y-6">
-        <TextField
-          fullWidth
-          id="outlined-basic"
-          label="Tên đăng nhập"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          id="outlined-basic"
-          label="Mật khẩu"
-          variant="outlined"
-        />
-        <TextField
-          fullWidth
-          id="outlined-basic"
-          label="Nhập lại mật khẩu"
-          variant="outlined"
-        />
-        <div>
-          <Button fullWidth variant="contained" className="bg-blue-500">
-            Đăng ký
-          </Button>
-        </div>
-      </form>
-    </div>
-  )
-}

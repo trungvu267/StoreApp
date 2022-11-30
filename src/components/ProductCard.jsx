@@ -9,20 +9,11 @@ import {
 } from '@mui/material'
 import Typography from '@mui/material/Typography'
 import testImage from '../../assets/images/products/yellowT.png'
-import { toast } from 'react-toastify'
 import { currencyFormatter } from '../utils/helper'
+import { successToast } from '../utils/toastify'
 export default function ProductCard({ product }) {
   const handleAddToCartBtn = () => {
-    toast('🦄 Add To Cart Successfully!', {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
-    })
+    successToast('🦄 Add To Cart Successfully!')
   }
   return (
     <Card sx={{ maxWidth: 200 }} className="col-span-1 mx-auto">
