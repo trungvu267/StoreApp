@@ -10,7 +10,8 @@ import {
 import Typography from '@mui/material/Typography'
 import testImage from '../../assets/images/products/yellowT.png'
 import { toast } from 'react-toastify'
-export default function ProductCard() {
+import { currencyFormatter } from '../utils/helper'
+export default function ProductCard({ product }) {
   const handleAddToCartBtn = () => {
     toast('🦄 Add To Cart Successfully!', {
       position: 'top-right',
@@ -36,7 +37,15 @@ export default function ProductCard() {
       </div>
       <CardContent className="pb-0 mb-0">
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {product.productName}
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="p"
+          component="div"
+          className="my-0 py-0"
+        >
+          {currencyFormatter.format(product.price)}
         </Typography>
       </CardContent>
       <CardActions>
