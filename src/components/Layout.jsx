@@ -56,10 +56,6 @@ function ResponsiveAppBar() {
   // const handleOpenProfile = () =>{
   //   get
   // }
-  const handleOpenCart = () => {
-    navigate('.../cart')
-  }
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
