@@ -13,17 +13,26 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import AdbIcon from '@mui/icons-material/Adb'
 import { Link } from 'gatsby'
+import { useAtom } from 'jotai'
+import { userAtom } from '../states/user.state'
 
 const pages = [
   { link: '/', label: 'Home' },
   { link: '/cart', label: 'Cart' },
   { link: '/online-order', label: 'Online Order' },
 ]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+const settings = [
+  { label: 'Profile' },
+  { label: 'Account' },
+  { label: 'Dashboard' },
+  { label: 'Logout' },
+]
+const settingsWithoutUser = [{ label: 'Login' }]
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [user, setUser] = useAtom(userAtom)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -39,6 +48,12 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+  const handleLogoutUser = () => {
+    setUser(null)
+  }
+  // const handleOpenProfile = () =>{
+  //   get
+  // }
 
   return (
     <AppBar position="static">
@@ -156,11 +171,30 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {user
+                ? settings.map((setting) => (
+                    <MenuItem
+                      key={setting.label}
+                      onClick={
+                        setting.label === 'Logout'
+                          ? handleLogoutUser
+                          : handleCloseUserMenu
+                      }
+                    >
+                      <Typography textAlign="center">
+                        {setting.label}
+                      </Typography>
+                    </MenuItem>
+                  ))
+                : settingsWithoutUser.map((setting) => (
+                    <MenuItem key={setting.label} onClick={handleCloseUserMenu}>
+                      <Link to="/login">
+                        <Typography textAlign="center">
+                          {setting.label}
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  ))}
             </Menu>
           </Box>
         </Toolbar>
