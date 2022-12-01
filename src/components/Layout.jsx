@@ -15,10 +15,12 @@ import AdbIcon from '@mui/icons-material/Adb'
 import { Link } from 'gatsby'
 import { useAtom } from 'jotai'
 import { userAtom } from '../states/user.state'
-
+import { RESET } from 'jotai/utils'
+import { navigate } from 'gatsby'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import { Badge } from '@mui/material'
 const pages = [
   { link: '/', label: 'Home' },
-  { link: '/cart', label: 'Cart' },
   { link: '/online-order', label: 'Online Order' },
 ]
 const settings = [
@@ -49,11 +51,14 @@ function ResponsiveAppBar() {
     setAnchorElUser(null)
   }
   const handleLogoutUser = () => {
-    setUser(null)
+    setUser(RESET)
   }
   // const handleOpenProfile = () =>{
   //   get
   // }
+  const handleOpenCart = () => {
+    navigate('.../cart')
+  }
 
   return (
     <AppBar position="static">
@@ -148,7 +153,16 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
+          <Box className="mr-2">
+            <Link to="/cart">
+              <IconButton>
+                <Badge badgeContent={4} color="secondary">
+                  <ShoppingCartIcon color="action" />
+                </Badge>
+              </IconButton>
+            </Link>
+          </Box>
+          <Box className="mr-2">{user && user.userName}</Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

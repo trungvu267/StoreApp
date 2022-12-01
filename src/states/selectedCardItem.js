@@ -26,4 +26,4 @@ const initialRows = [
 ]
 
 export const selectedCartItemIdAtom = atom('')
-export const cartItemsAtom = atom(initialRows)
+export const cartItemsAtom = atom([])

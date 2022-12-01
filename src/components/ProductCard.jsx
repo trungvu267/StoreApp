@@ -11,10 +11,19 @@ import Typography from '@mui/material/Typography'
 import testImage from '../../assets/images/products/yellowT.png'
 import { currencyFormatter } from '../utils/helper'
 import { successToast } from '../utils/toastify'
+import {
+  selectedCartItemIdAtom,
+  cartItemsAtom,
+} from '../states/selectedCardItem'
+import { useAtom } from 'jotai'
 export default function ProductCard({ product }) {
   const handleAddToCartBtn = () => {
     successToast('🦄 Add To Cart Successfully!')
   }
+  const [selectedCardItem, setSelectedCartItemId] = useAtom(
+    selectedCartItemIdAtom
+  )
+  const [cartItems, setCartItems] = useAtom(cartItemsAtom)
   return (
     <Card sx={{ maxWidth: 200 }} className="col-span-1 mx-auto">
       <div className="p-3 bg-blue-200">

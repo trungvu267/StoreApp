@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { navigate } from 'gatsby'
-import { errorToast } from '../utils/toastify'
 
 export const instance = axios.create({
   // baseURL: 'https://api.publicapis.org',
