@@ -11,7 +11,6 @@ export const instance = axios.create({
 })
 const storeApi = {
   getProducts: async () => {
-    // const response = await instance.get('/entries')
     const response = await instance.get('/products')
     const data = await response.data
     console.log(data)
@@ -40,6 +39,12 @@ const storeApi = {
     return await instance.post('/users/login', {
       username,
       password,
+    })
+  },
+  setOnlineOrder: async ({ userId, products }) => {
+    return await instance.post('/carts', {
+      userId,
+      products,
     })
   },
 }

@@ -6,8 +6,10 @@ import { userAtom } from '../states/user.state'
 import { useAtom } from 'jotai'
 import { errorToast } from '../utils/toastify'
 import { navigate } from 'gatsby'
+import { loginModalAtom } from '../states/modal.state'
 const LoginForm = () => {
   const [user, setUser] = useAtom(userAtom)
+  const [, setLoginModal] = useAtom(loginModalAtom)
   const methods = useForm()
   const errors = methods.formState.errors
   const onSubmit = async (data) => {
@@ -16,6 +18,7 @@ const LoginForm = () => {
       const response = await storeApi.login({ username, password })
       const data = await response.data
       setUser(data)
+      setLoginModal(false)
       navigate('../')
     } catch (error) {
       console.log(error)

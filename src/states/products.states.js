@@ -1,2 +1,2 @@
-import { atom } from 'jotai'
-export const productsAtom = atom(null)
+import { atomWithStorage } from 'jotai/utils'
+export const productsAtom = atomWithStorage('products', null)

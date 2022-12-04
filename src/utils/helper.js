@@ -1,6 +1,5 @@
 export const getCartItemById = (id, products) => {
-  const cartItem = products.find((item) => item.id === id)
-  return cartItem
+  return products.find((item) => item.id === id)
 }
 export const numberFormatter = new Intl.NumberFormat('vi-VN')
 export const currencyFormatter = new Intl.NumberFormat('vi-VN', {

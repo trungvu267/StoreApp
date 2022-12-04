@@ -5,9 +5,13 @@ import { cartItemsAtom } from '../states/selectedCardItem'
 import { useAtom } from 'jotai'
 import CartItem from '../components/CartItem'
 import ToastContainer from '../components/ToastContainer'
+import { navigate } from 'gatsby'
+import storeApi from '../services/storeApi'
+import { userAtom } from '../states/user.state'
+import { successToast, errorToast } from '../utils/toastify'
 export default function Cart() {
   const [cartItems] = useAtom(cartItemsAtom)
-  console.log(cartItems)
+
   return (
     <div>
       <Layout />
@@ -23,7 +27,16 @@ export const Head = () => <title>Cart</title>
 
 const CartItems = () => {
   const [cartItems] = useAtom(cartItemsAtom)
-
+  const [user] = useAtom(userAtom)
+  const handleClick = async () => {
+    try {
+      await storeApi.setOnlineOrder({ userId: user.id, products: cartItems })
+      successToast('Đặt đơn hàng thành công!')
+    } catch (error) {
+      console.log(error)
+      errorToast('Đặt đơn hàng thất bại!')
+    }
+  }
   const cartItemsEle = cartItems.map((cartItem) => {
     return <CartItem cartItem={cartItem} />
   })
@@ -52,6 +65,7 @@ const CartItems = () => {
           variant="contained"
           color="success"
           sx={{ backgroundColor: '#00e676' }}
+          onClick={handleClick}
         >
           Xác nhận
         </Button>
@@ -70,12 +84,20 @@ const CartWithoutItem = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'column',
       }}
       className="space-y-3"
     >
       <Typography component="div" variant="h4">
         Không có sản phẩm trong giỏ hàng
       </Typography>
+      <Button
+        onClick={() => {
+          navigate('../')
+        }}
+      >
+        Quay lại trang mua sắm
+      </Button>
     </Box>
   )
 }

@@ -5,12 +5,12 @@ import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
+import MenuIcon from '@mui/icons-material/Menu'
 import AdbIcon from '@mui/icons-material/Adb'
 import { Link } from 'gatsby'
 import { useAtom } from 'jotai'
@@ -19,6 +19,9 @@ import { RESET } from 'jotai/utils'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { Badge } from '@mui/material'
 import { cartItemsAtom } from '../states/selectedCardItem'
+import { loginModalAtom } from '../states/modal.state'
+import { navigate } from 'gatsby'
+
 const pages = [
   { link: '/', label: 'Home' },
   { link: '/online-order', label: 'Online Order' },
@@ -36,6 +39,7 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const [user, setUser] = useAtom(userAtom)
   const [cartItems] = useAtom(cartItemsAtom)
+  const [, setLoginModal] = useAtom(loginModalAtom)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -53,6 +57,10 @@ function ResponsiveAppBar() {
   }
   const handleLogoutUser = () => {
     setUser(RESET)
+  }
+  const handleOpenCart = () => {
+    if (user) return navigate('/cart')
+    setLoginModal(true)
   }
   // const handleOpenProfile = () =>{
   //   get
@@ -151,13 +159,11 @@ function ResponsiveAppBar() {
             ))}
           </Box>
           <Box className="mr-2">
-            <Link to="/cart">
-              <IconButton>
-                <Badge badgeContent={cartItems.length} color="secondary">
-                  <ShoppingCartIcon color="action" />
-                </Badge>
-              </IconButton>
-            </Link>
+            <IconButton onClick={handleOpenCart}>
+              <Badge badgeContent={cartItems.length} color="secondary">
+                <ShoppingCartIcon color="action" />
+              </Badge>
+            </IconButton>
           </Box>
           <Box className="mr-2">{user && user.userName}</Box>
           <Box sx={{ flexGrow: 0 }}>
