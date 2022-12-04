@@ -6,38 +6,47 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Typography,
 } from '@mui/material'
-import Typography from '@mui/material/Typography'
 import testImage from '../../assets/images/products/yellowT.png'
-import { currencyFormatter } from '../utils/helper'
+import { currencyFormatter, getMatchItemById } from '../utils/helper'
 import { successToast } from '../utils/toastify'
-import {
-  selectedCartItemIdAtom,
-  cartItemsAtom,
-} from '../states/selectedCardItem'
+import { cartItemsAtom } from '../states/selectedCardItem'
 import { useAtom } from 'jotai'
 export default function ProductCard({ product }) {
-  const handleAddToCartBtn = () => {
+  const [, setCartItems] = useAtom(cartItemsAtom)
+  const handleAddToCartBtn = (productId) => {
+    setCartItems((preCartItems) => {
+      const matchItem = getMatchItemById(productId, preCartItems)
+      if (!matchItem) return [...preCartItems, { productId, quantity: 1 }]
+      return preCartItems.map((item) => {
+        if (item.productId === productId)
+          return { ...item, quantity: item.quantity + 1 }
+        return item
+      })
+    })
     successToast('🦄 Add To Cart Successfully!')
   }
-  const [selectedCardItem, setSelectedCartItemId] = useAtom(
-    selectedCartItemIdAtom
-  )
-  const [cartItems, setCartItems] = useAtom(cartItemsAtom)
   return (
     <Card sx={{ maxWidth: 200 }} className="col-span-1 mx-auto">
       <div className="p-3 bg-blue-200">
         <CardMedia
           component="img"
           height="50"
-          image={testImage}
+          width="50%"
+          image={product.image || testImage}
           alt="green iguana"
           className="mx-auto"
         />
       </div>
       <CardContent className="pb-0 mb-0">
-        <Typography gutterBottom variant="h5" component="div">
-          {product.productName}
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          className="text-base"
+        >
+          {product.title}
         </Typography>
         <Typography
           gutterBottom
@@ -60,7 +69,7 @@ export default function ProductCard({ product }) {
             size="small"
             color="success"
             className="w-full"
-            onClick={handleAddToCartBtn}
+            onClick={() => handleAddToCartBtn(product.id)}
           >
             Add to cart
           </Button>

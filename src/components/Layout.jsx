@@ -16,9 +16,9 @@ import { Link } from 'gatsby'
 import { useAtom } from 'jotai'
 import { userAtom } from '../states/user.state'
 import { RESET } from 'jotai/utils'
-import { navigate } from 'gatsby'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { Badge } from '@mui/material'
+import { cartItemsAtom } from '../states/selectedCardItem'
 const pages = [
   { link: '/', label: 'Home' },
   { link: '/online-order', label: 'Online Order' },
@@ -35,6 +35,7 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const [user, setUser] = useAtom(userAtom)
+  const [cartItems] = useAtom(cartItemsAtom)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -152,7 +153,7 @@ function ResponsiveAppBar() {
           <Box className="mr-2">
             <Link to="/cart">
               <IconButton>
-                <Badge badgeContent={4} color="secondary">
+                <Badge badgeContent={cartItems.length} color="secondary">
                   <ShoppingCartIcon color="action" />
                 </Badge>
               </IconButton>
