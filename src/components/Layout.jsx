@@ -28,7 +28,7 @@ const pages = [
 ]
 const settings = [
   { label: 'Profile' },
-  { label: 'Account' },
+  { label: 'Address' },
   { label: 'Dashboard' },
   { label: 'Logout' },
 ]
