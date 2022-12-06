@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export const instance = axios.create({
-  // baseURL: 'https://api.publicapis.org',
   baseURL: 'https://localhost:7280/api',
   header: {
     Accept: 'application/json',
@@ -13,7 +12,11 @@ const storeApi = {
   getProducts: async () => {
     const response = await instance.get('/products')
     const data = await response.data
-    console.log(data)
+    return data
+  },
+  getProduct: async (productId) => {
+    const response = await instance.get(`/products/${productId}`)
+    const data = await response.data
     return data
   },
   getUsers: async () => {
@@ -41,11 +44,38 @@ const storeApi = {
       password,
     })
   },
-  setOnlineOrder: async ({ userId, products }) => {
+  setOnlineOrder: async ({ userId, products, addressId }) => {
     return await instance.post('/carts', {
       userId,
       products,
+      addressId,
     })
+  },
+  createAddress: async ({ userId, street, cellphone }) => {
+    return await instance.post('/addresses', {
+      userId,
+      street,
+      cellphone,
+    })
+  },
+  getAddressesByUserId: async (userId) => {
+    return await instance.get(`/addresses/users/${userId}`)
+  },
+  getAddress: async (addressId) => {
+    return await instance.get(`/addresses/${addressId}`)
+  },
+  setAddress: async ({ id, userId, street, cellphone }) => {
+    return await instance.put(`/addresses/${id}`, {
+      userId,
+      street,
+      cellphone,
+    })
+  },
+  removeAddress: async (addressId) => {
+    return await instance.delete(`/addresses/${addressId}`)
+  },
+  getOnlineOrder: async (userId) => {
+    return await instance.get(`/carts/users/${userId}`)
   },
 }
 

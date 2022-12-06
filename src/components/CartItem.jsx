@@ -90,16 +90,17 @@ export default function CartItem({ cartItem }) {
           <Typography component="div" variant="p" noWrap>
             {item.title}
           </Typography>
-        </CardContent>
-        <CardContent>
           <Typography
             variant="subtitle1"
             color="text.secondary"
             component="div"
           >
-            {numberFormatter.format(item.price)}
+            {numberFormatter.format(
+              getTotalPrice(item.price, cartItem.quantity)
+            )}
           </Typography>
         </CardContent>
+
         <CardContent
           sx={{
             display: 'flex',
@@ -116,9 +117,7 @@ export default function CartItem({ cartItem }) {
             <AddIcon />
           </IconButton>
         </CardContent>
-        <CardContent>
-          {numberFormatter.format(getTotalPrice(item.price, cartItem.quantity))}
-        </CardContent>
+
         <CardContent>
           <IconButton aria-label="delete" onClick={handleRemoveBtn}>
             <DeleteIcon />

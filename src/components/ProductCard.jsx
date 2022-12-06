@@ -31,7 +31,7 @@ export default function ProductCard({ product }) {
           return item
         })
       })
-      successToast('🦄 Add To Cart Successfully!')
+      successToast('🦄Thêm sản phẩm vào giỏ hàng thành công!')
     } else {
       setLoginModal(true)
     }
@@ -81,7 +81,7 @@ export default function ProductCard({ product }) {
               className="w-full"
               onClick={() => handleAddToCartBtn(product.id)}
             >
-              Add to cart
+              Thêm vào giỏ
             </Button>
             <Button
               variant="outlined"
