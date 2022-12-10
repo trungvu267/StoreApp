@@ -7,11 +7,11 @@ import { Box, Button, IconButton } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import { productsAtom } from '../states/products.states'
 import { cartItemsAtom } from '../states/selectedCardItem'
 import { useAtom } from 'jotai'
 import ToastContainer from '../components/ToastContainer'
-import { successToast } from '../utils/toastify'
+import { errorToast, successToast } from '../utils/toastify'
+import { userAtom } from '../states/user.state'
 const Product = ({ location }) => {
   const [fetching, setFetching] = useState(false)
   const [product, setProduct] = useState(null)
@@ -24,7 +24,6 @@ const Product = ({ location }) => {
     }
     async function getProduct() {
       const data = await storeApi.getProduct(productId)
-      console.log(data)
       setProduct(data)
     }
     setFetching(true)
@@ -49,8 +48,8 @@ export default Product
 
 const ProductDetail = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
-  const [cartItems, setCartItems] = useAtom(cartItemsAtom)
-  const [products] = useAtom(productsAtom)
+  const [, setCartItems] = useAtom(cartItemsAtom)
+  const [user] = useAtom(userAtom)
 
   const handleIncrementBtn = () => {
     setQuantity((preState) => preState + 1)
@@ -59,6 +58,10 @@ const ProductDetail = ({ product }) => {
     setQuantity((preState) => (preState === 1 ? 1 : preState - 1))
   }
   const handleAddToCartBtn = () => {
+    if (!user) {
+      errorToast('Vui lòng đăng nhập để thực hiện chức năng này')
+      return
+    }
     setCartItems((preCartItems) => {
       const matchItem = getMatchItemById(product.id, preCartItems)
       if (!matchItem)
