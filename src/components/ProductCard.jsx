@@ -1,12 +1,10 @@
 import * as React from 'react'
 import {
-  ButtonGroup,
-  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
-  Typography,
+  IconButton,
 } from '@mui/material'
 import testImage from '../../assets/images/products/yellowT.png'
 import { currencyFormatter, getMatchItemById } from '../utils/helper'
@@ -16,6 +14,8 @@ import { useAtom } from 'jotai'
 import LoginModal from '../components/LoginModal'
 import { userAtom } from '../states/user.state'
 import { loginModalAtom } from '../states/modal.state'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
+import EditIcon from '@mui/icons-material/Edit'
 import { navigate } from 'gatsby'
 
 export default function ProductCard({ product }) {
@@ -55,50 +55,35 @@ export default function ProductCard({ product }) {
           />
         </div>
         <CardContent className="pb-0 mb-0">
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            className="text-base"
-          >
-            {product.title}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="p"
-            component="div"
-            className="my-0 py-0"
-          >
+          <div className="text-xl font-bold h-14">{product.title}</div>
+          <div className="text-base h-9">
             {currencyFormatter.format(product.price)}
-          </Typography>
+          </div>
         </CardContent>
-        <CardActions>
-          <ButtonGroup
-            orientation="vertical"
-            aria-label="vertical contained button group"
-            variant="contained"
-            className="space-y-1"
-          >
-            <Button
+        <div className="flex flex-row justify-center items-center space-x-2 px-4 pb-2">
+          <div className="border-2 border-blue-300 rounded-md flex-1 ">
+            <IconButton
+              aria-label="add"
               variant="outlined"
-              size="small"
-              color="success"
-              className="w-full"
+              color="primary"
               onClick={() => handleAddToCartBtn(product.id)}
+              className="w-full"
             >
-              Thêm vào giỏ
-            </Button>
-            <Button
+              <AddShoppingCartIcon />
+            </IconButton>
+          </div>
+          <div className="border-2 border-blue-300 rounded-md flex-1 ">
+            <IconButton
+              aria-label="detail"
               variant="outlined"
-              size="small"
-              color="warning"
+              color="primary"
               className="w-full m-0"
               onClick={() => handleSelectedProductDetail(product.id)}
             >
-              Chi tiết sản phẩm
-            </Button>
-          </ButtonGroup>
-        </CardActions>
+              <EditIcon />
+            </IconButton>
+          </div>
+        </div>
       </Card>
       <LoginModal />
     </>
