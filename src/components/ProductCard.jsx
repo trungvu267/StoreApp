@@ -16,6 +16,8 @@ import { useAtom } from 'jotai'
 import LoginModal from '../components/LoginModal'
 import { userAtom } from '../states/user.state'
 import { loginModalAtom } from '../states/modal.state'
+import { navigate } from 'gatsby'
+
 export default function ProductCard({ product }) {
   const [, setCartItems] = useAtom(cartItemsAtom)
   const [, setLoginModal] = useAtom(loginModalAtom)
@@ -35,6 +37,9 @@ export default function ProductCard({ product }) {
     } else {
       setLoginModal(true)
     }
+  }
+  const handleSelectedProductDetail = (productId) => {
+    navigate(`/product?id=${productId}`)
   }
   return (
     <>
@@ -88,8 +93,9 @@ export default function ProductCard({ product }) {
               size="small"
               color="warning"
               className="w-full m-0"
+              onClick={() => handleSelectedProductDetail(product.id)}
             >
-              View Product detail
+              Chi tiết sản phẩm
             </Button>
           </ButtonGroup>
         </CardActions>

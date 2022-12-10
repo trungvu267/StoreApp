@@ -5449,6 +5449,11 @@ gatsby-parcel-config@^1.2.0:
     "@parcel/transformer-js" "2.6.2"
     "@parcel/transformer-json" "2.6.2"
 
+gatsby-plugin-dynamic-routes@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-dynamic-routes/-/gatsby-plugin-dynamic-routes-1.0.2.tgz#7b90ecfffae999d06cca6abcb0f8aeebc7bf85ab"
+  integrity sha512-Cz8U1XUa+NqZThpHdLvBG7n5bC2PGA07utg3mOt5Py/c2LQ3RlqIBV7CmXAVWBWJfkM/YE/zSzdRFyrqovlRcA==
+
 gatsby-plugin-material-ui@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-material-ui/-/gatsby-plugin-material-ui-4.0.2.tgz#269d0b0ade1885ccc99342091ef3ef73c50b895c"
