@@ -45,7 +45,7 @@ const storeApi = {
     })
   },
   setOnlineOrder: async ({ userId, products, addressId }) => {
-    return await instance.post('/carts', {
+    return await instance.post('/onlineOrders', {
       userId,
       products,
       addressId,
@@ -75,7 +75,7 @@ const storeApi = {
     return await instance.delete(`/addresses/${addressId}`)
   },
   getOnlineOrder: async (userId) => {
-    return await instance.get(`/carts/users/${userId}`)
+    return await instance.get(`/onlineOrders/users/${userId}`)
   },
 }
 

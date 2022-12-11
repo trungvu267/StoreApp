@@ -15,7 +15,7 @@ import { userAtom } from '../states/user.state'
 import storeApi from '../services/storeApi'
 import DeleteIcon from '@mui/icons-material/Delete'
 import CreateIcon from '@mui/icons-material/Create'
-import { errorToast, infoToast, successToast } from '../utils/toastify'
+import { errorToast, successToast } from '../utils/toastify'
 import {
   addressesAtom,
   editAddressAtom,

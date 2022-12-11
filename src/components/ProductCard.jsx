@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
-} from '@mui/material'
+import { Card, CardContent, CardMedia, IconButton } from '@mui/material'
 import testImage from '../../assets/images/products/yellowT.png'
 import { currencyFormatter, getMatchItemById } from '../utils/helper'
 import { successToast } from '../utils/toastify'

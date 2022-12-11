@@ -21,6 +21,7 @@ import { Badge } from '@mui/material'
 import { cartItemsAtom } from '../states/selectedCardItem'
 import { loginModalAtom } from '../states/modal.state'
 import { navigate } from 'gatsby'
+import { addressesAtom, selectedAddressAtom } from '../states/address.state'
 
 const pages = [
   { link: '/', label: 'Home' },
@@ -38,9 +39,10 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const [user, setUser] = useAtom(userAtom)
-  const [cartItems] = useAtom(cartItemsAtom)
+  const [cartItems, setCartItems] = useAtom(cartItemsAtom)
   const [, setLoginModal] = useAtom(loginModalAtom)
-
+  const [, setSelectedAddress] = useAtom(selectedAddressAtom)
+  const [, setAddresses] = useAtom(addressesAtom)
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -57,6 +59,9 @@ function ResponsiveAppBar() {
   }
   const handleLogoutUser = () => {
     setUser(RESET)
+    setAddresses(RESET)
+    setSelectedAddress(RESET)
+    setCartItems(RESET)
   }
   const handleOpenCart = () => {
     if (user) return navigate('/cart')
